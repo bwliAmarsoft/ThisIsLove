@@ -1,0 +1,62 @@
+      /**
+	     * 方法的描述：迭代器ListIterator可以对集合中的元素进行修改，
+	     * 调用add()方法,但还是不能再迭代遍历集合的过程中不能进行list集合自己的修改，这是不允许的
+	     * @data 下午8:11:08
+	     * @Exception 
+	     * @return void
+	     */
+	    @Test
+public void listIteratorDifference(){
+	    	 List< String> list = new ArrayList<String>();
+	    	 list.add("22");
+	    	 list.add("33");
+	    	 list.add("23");
+	    	 list.add("32");
+	    	 list.add("45");
+	    	 list.add("54");
+	    	 list.add("56");
+			ListIterator<String> listIterator = list.listIterator();
+	    	 while(listIterator.hasNext()){
+	    		 String next = listIterator.next();
+	    		 if(next.startsWith("2")){
+	    			//正常，这个正常是因为ListIterator自己实现了add方法，会调用当前list的add方法进行添加
+	    			 listIterator.add("fsafds");//正常
+	    			
+	    			 //这个正常，是因为iterator接口自己的方法，只是在list实现类中做了实现
+	    			 listIterator.remove();//正常
+	    			 
+	    			 //这个异常，是因为集合在迭代的过程中是不允许进行修改的
+	    			 list.add("fsadfdsa");//异常
+	    		 }
+	    	 }
+	    	 System.out.println(list);
+	     }
+       
+      /**
+	     * 方法的描述：Iterator迭代器只有remove() next() hasNext() forEachRemaining()几个方法，
+	     * 所以不能对集合进行元素的添加，但可以删除元素
+	     * @data 下午8:10:52
+	     * @Exception 
+	     * @return void
+	     */
+	    @Test
+	    public void IteratorDifference(){
+	    	 List< String> list = new ArrayList<String>();
+	    	 list.add("22");
+	    	 list.add("33");
+	    	 list.add("23");
+	    	 list.add("32");
+	    	 list.add("45");
+	    	 list.add("54");
+	    	 list.add("56");
+	    	 Iterator<String> iterator = list.iterator();
+	    	 while(iterator.hasNext()){
+	    		 String next = iterator.next();
+	    		 if(next.startsWith("2")){
+	    			 /*list.remove(next);*/
+	    			 iterator.remove();
+	    		 }
+	    	 }
+	    	 System.out.println(list);
+	     }
+       //对一个简单的list集合{"22","32","43"},将其中以"2"开头的元素删除和替换，可以选择上面的两个方法中符合的，进行操作即可
