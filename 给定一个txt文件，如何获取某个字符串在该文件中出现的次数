@@ -1,0 +1,28 @@
+/**
+	 * 方法的描述：给定一个txt文件，如何得到某字符串出现的次数
+	 * @data 下午8:21:42
+	 * @Exception 
+	 * @return void
+	 */
+	@Test
+	public void test() throws Exception{
+		File file = new File("E://test.txt");
+
+		InputStream is = new FileInputStream(file);
+
+		byte b[] = new byte[(int) file.length()];
+		int a = is.read(b, 0,(int)file.length());//这一块在调用.length方法的时候，是要做文件是否存在的判断的，这里只是简单处理的
+		System.out.println("a= "+a);
+		String strs[] = new String(b,0,a).split("");//这个是将所有字符进行拆分
+		String str = new String(b, 0, a);
+		System.out.println("str: "+str);
+		int count = 0;
+
+		for(int i = 0;i<strs.length;i++){
+
+		if("s".equals(strs[i]))count++;
+
+		}
+
+		System.out.println(count);
+	}
