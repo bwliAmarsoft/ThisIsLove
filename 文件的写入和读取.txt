@@ -1,0 +1,100 @@
+/**
+	 * 方法的描述：文件以对象的形式写入，写入后的文件打开会看见乱码，那是因为是以二进制的形式写入的，可以强制进行tostring后进行写入
+	 * @data 下午8:53:20
+	 * @Exception 
+	 * @return void
+	 */
+	public void writeObjects(){
+		User[] users = new User[] {new User("dh", "234232", "49034"),new User("zs", "4343", "5423"),new User("fd", "54566546", "ddfdfs")};
+		File file = new File("test.txt");
+		ObjectOutputStream outputStream = null;
+		try {
+			outputStream = new ObjectOutputStream(new FileOutputStream(file));
+			for(User user:users){
+				outputStream.writeObject(user.toString());
+			}
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(outputStream!=null){
+				try {
+					outputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	/**
+	 * 方法的描述：文件以对象的形式读取
+	 * @data 下午8:52:49
+	 * @Exception 
+	 * @return void
+	 */
+	public void readObject(){
+		File file = new File("test.txt");
+		ObjectInputStream inputStream = null;
+		List<Object> list = new ArrayList<Object>();
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream(file);
+			inputStream = new ObjectInputStream(fileInputStream);
+			while(fileInputStream.available()>0){
+				list.add(inputStream.readObject());
+			}
+		}catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			if(inputStream!=null){
+				try {
+					inputStream.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		System.out.println(list);
+		
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+package com.bwli.pojo;
+
+import java.io.Serializable;
+
+public class User implements Serializable{
+	private String name;
+	private String password;
+	private String userId;
+	public User(String name, String password, String userId) {
+		super();
+		this.name = name;
+		this.password = password;
+		this.userId = userId;
+	}
+	@Override
+	public String toString() {
+		return "User [name=" + name + ", password=" + password + ", userId="
+				+ userId + "]";
+	}
+	
+	
+}
