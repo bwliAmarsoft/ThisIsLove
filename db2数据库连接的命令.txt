@@ -1,0 +1,64 @@
+首先是需要连接到数据库的连接地址中
+su - db2inst1 
+db2 connect to rcmstest user db2inst1 using amarsoft
+
+db2 start 
+db2 stop force
+
+reorg table tablename 进行表的解锁
+
+
+查询数据库版本信息的sql语句：
+db2数据库：SELECT service_level, fixpack_num FROM TABLE (sysproc.env_get_inst_info()) as INSTANCEINFO
+
+oracle数据库：select * from v$version;
+
+
+db2数据库导出.ddl文件时的步骤：
+	如果用xshell的要进行如下的步骤
+	1、首先是以管理员的身份运行xshell,并连接到db2数据库的服务：192.168.65.92
+	2、然后切换到db2数据库：su db2inst1
+	3、然后在相应的目录下创建文件夹：mkdir backup（一般在db2inst1文件夹下进行创建，
+	例如mkdir /home/db2inst1/backup,mkdir /home/db2inst1/backup/db2move）
+	4、db2look -d rcmstest -u db2inst1 -e -o /home/db2inst1/backup/rcmsExport.ddl
+		(这里也可以直接切换到backup路径下执行语句，db2look -d rcmstest -u db2inst1 -e -o rcmsExport.ddl，需要注意
+		的是，如果这里在home前需要添加/，否则可能会报错，停止文件的导出)
+	5、切换到db2move文件下，执行db2move rcmstest export -u db2inst1 -p amarsoft
+	6、等待文件的执行结束
+oracle 数据库导出.dmp文件时的步骤：
+	1、首先是查看需要导出的用户下是否存在数据为空的表，查询空表的语句是
+		select table_name from user_table where num_rows=0 
+		或者统计空表的数量 select count(*) from user_table where num_rows=0 
+		这里还要注意的是，当在一个表空间中存在多张名字相同的表在不同的用户下的时候，有可能其他用户下该张表中有数据，而在当前用户
+		下是没有数据的，那么此时用上面的语句会查不到该张表的，因为它的num_rows不为0但是，在该用户下是空表，这种情况就需要进行比对
+	2、如果存在空表，那么执行如下的语句：
+		select 'alter table '||table_name||' allocate extent;' from user_table where num_rows=0 or num_rows is null ;
+		将查询出的语句批量（或者单一）的执行，对空表进行空间的手动分配.
+		
+		如果不存在空表，那么直接继续步骤3
+	3、以管理员的身份执行doc命令（cmd）,然后执行如下的语句
+		exp rcms11test/rcms11test@192.168.65.92:1521/orcl file=C:\software\exporOracle\rcmsExport.dmp
+	5、等待文件的导入成功
+	6、成功之后，需要进行验证，看是否有漏掉为导出的表结构
+		这种情况是因为在相同表空间中，在不同的用户下存在相同表时，当其中有一个用户下的表不为空，那么步骤1就不会查到该张表，
+		也就不会分配空间，在导出时就会出现该张表的信息的缺失。考虑到这种情况，还是需要将已经导出的文件，通过创建新的用户并将文件导入
+		然后通过select count(*) from user_tables对比两个用户下表的数据是否相等
+
+oracle 数据库导入.dmp文件时的步骤：
+	1、打开doc命令窗口（cmd），然后执行如下的语句：
+		imp rcmsExport/rcmsExport@192.168.65.92:1521/orcl file=C:\software\Export
+
+oracle创建用户：
+	create user shopping identified by shopping--用户名为shopping，密码为shopping
+	default tablespace shopping --默认表空间为shopping
+	temporary tablespace shopping_temp; --默认临时表空间为shopping_temp
+
+	grant connect,resource,dba to shopping;
+	
+
+	创建用户
+	create user User_Test identified by Password_Test default tablespace TableSpace_Test account unlock;
+
+	--给用户授权
+	grant create table,create view,create trigger, create sequence,create procedure to User_Test;
+	grant dba to User_Test;
