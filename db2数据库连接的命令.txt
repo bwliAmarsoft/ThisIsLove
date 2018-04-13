@@ -23,7 +23,7 @@ db2数据库导出.ddl文件时的步骤：
 	4、db2look -d rcmstest -u db2inst1 -e -o /home/db2inst1/backup/rcmsExport.ddl
 		(这里也可以直接切换到backup路径下执行语句，db2look -d rcmstest -u db2inst1 -e -o rcmsExport.ddl，需要注意
 		的是，如果这里在home前需要添加/，否则可能会报错，停止文件的导出)
-	5、切换到db2move文件下，执行db2move rcmstest export -u db2inst1 -p amarsoft
+	5、切换到db2move文件下，执行db2move database export -u db2inst1 -p password
 	6、等待文件的执行结束
 oracle 数据库导出.dmp文件时的步骤：
 	1、首先是查看需要导出的用户下是否存在数据为空的表，查询空表的语句是
