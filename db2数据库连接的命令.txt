@@ -1,64 +1,64 @@
-Ê×ÏÈÊÇĞèÒªÁ¬½Óµ½Êı¾İ¿âµÄÁ¬½ÓµØÖ·ÖĞ
+é¦–å…ˆæ˜¯éœ€è¦è¿æ¥åˆ°æ•°æ®åº“çš„è¿æ¥åœ°å€ä¸­
 su - db2inst1 
-db2 connect to rcmstest user db2inst1 using amarsoft
+db2 connect to database user db2inst1 using password
 
 db2 start 
 db2 stop force
 
-reorg table tablename ½øĞĞ±íµÄ½âËø
+reorg table tablename è¿›è¡Œè¡¨çš„è§£é”
 
 
-²éÑ¯Êı¾İ¿â°æ±¾ĞÅÏ¢µÄsqlÓï¾ä£º
-db2Êı¾İ¿â£ºSELECT service_level, fixpack_num FROM TABLE (sysproc.env_get_inst_info()) as INSTANCEINFO
+æŸ¥è¯¢æ•°æ®åº“ç‰ˆæœ¬ä¿¡æ¯çš„sqlè¯­å¥ï¼š
+db2æ•°æ®åº“ï¼šSELECT service_level, fixpack_num FROM TABLE (sysproc.env_get_inst_info()) as INSTANCEINFO
 
-oracleÊı¾İ¿â£ºselect * from v$version;
+oracleæ•°æ®åº“ï¼šselect * from v$version;
 
 
-db2Êı¾İ¿âµ¼³ö.ddlÎÄ¼şÊ±µÄ²½Öè£º
-	Èç¹ûÓÃxshellµÄÒª½øĞĞÈçÏÂµÄ²½Öè
-	1¡¢Ê×ÏÈÊÇÒÔ¹ÜÀíÔ±µÄÉí·İÔËĞĞxshell,²¢Á¬½Óµ½db2Êı¾İ¿âµÄ·şÎñ£º192.168.65.92
-	2¡¢È»ºóÇĞ»»µ½db2Êı¾İ¿â£ºsu db2inst1
-	3¡¢È»ºóÔÚÏàÓ¦µÄÄ¿Â¼ÏÂ´´½¨ÎÄ¼ş¼Ğ£ºmkdir backup£¨Ò»°ãÔÚdb2inst1ÎÄ¼ş¼ĞÏÂ½øĞĞ´´½¨£¬
-	ÀıÈçmkdir /home/db2inst1/backup,mkdir /home/db2inst1/backup/db2move£©
-	4¡¢db2look -d rcmstest -u db2inst1 -e -o /home/db2inst1/backup/rcmsExport.ddl
-		(ÕâÀïÒ²¿ÉÒÔÖ±½ÓÇĞ»»µ½backupÂ·¾¶ÏÂÖ´ĞĞÓï¾ä£¬db2look -d rcmstest -u db2inst1 -e -o rcmsExport.ddl£¬ĞèÒª×¢Òâ
-		µÄÊÇ£¬Èç¹ûÕâÀïÔÚhomeÇ°ĞèÒªÌí¼Ó/£¬·ñÔò¿ÉÄÜ»á±¨´í£¬Í£Ö¹ÎÄ¼şµÄµ¼³ö)
-	5¡¢ÇĞ»»µ½db2moveÎÄ¼şÏÂ£¬Ö´ĞĞdb2move rcmstest export -u db2inst1 -p amarsoft
-	6¡¢µÈ´ıÎÄ¼şµÄÖ´ĞĞ½áÊø
-oracle Êı¾İ¿âµ¼³ö.dmpÎÄ¼şÊ±µÄ²½Öè£º
-	1¡¢Ê×ÏÈÊÇ²é¿´ĞèÒªµ¼³öµÄÓÃ»§ÏÂÊÇ·ñ´æÔÚÊı¾İÎª¿ÕµÄ±í£¬²éÑ¯¿Õ±íµÄÓï¾äÊÇ
+db2æ•°æ®åº“å¯¼å‡º.ddlæ–‡ä»¶æ—¶çš„æ­¥éª¤ï¼š
+	å¦‚æœç”¨xshellçš„è¦è¿›è¡Œå¦‚ä¸‹çš„æ­¥éª¤
+	1ã€é¦–å…ˆæ˜¯ä»¥ç®¡ç†å‘˜çš„èº«ä»½è¿è¡Œxshell,å¹¶è¿æ¥åˆ°db2æ•°æ®åº“çš„æœåŠ¡ï¼š192.168.65.73
+	2ã€ç„¶ååˆ‡æ¢åˆ°db2æ•°æ®åº“ï¼šsu db2inst1
+	3ã€ç„¶ååœ¨ç›¸åº”çš„ç›®å½•ä¸‹åˆ›å»ºæ–‡ä»¶å¤¹ï¼šmkdir backupï¼ˆä¸€èˆ¬åœ¨db2inst1æ–‡ä»¶å¤¹ä¸‹è¿›è¡Œåˆ›å»ºï¼Œ
+	ä¾‹å¦‚mkdir /home/db2inst1/backup,mkdir /home/db2inst1/backup/db2moveï¼‰
+	4ã€db2look -d rcmstest -u db2inst1 -e -o /home/db2inst1/backup/rcmsExport.ddl
+		(è¿™é‡Œä¹Ÿå¯ä»¥ç›´æ¥åˆ‡æ¢åˆ°backupè·¯å¾„ä¸‹æ‰§è¡Œè¯­å¥ï¼Œdb2look -d rcmstest -u db2inst1 -e -o rcmsExport.ddlï¼Œéœ€è¦æ³¨æ„
+		çš„æ˜¯ï¼Œå¦‚æœè¿™é‡Œåœ¨homeå‰éœ€è¦æ·»åŠ /ï¼Œå¦åˆ™å¯èƒ½ä¼šæŠ¥é”™ï¼Œåœæ­¢æ–‡ä»¶çš„å¯¼å‡º)
+	5ã€åˆ‡æ¢åˆ°db2moveæ–‡ä»¶ä¸‹ï¼Œæ‰§è¡Œdb2move rcmstest export -u db2inst1 -p amarsoft
+	6ã€ç­‰å¾…æ–‡ä»¶çš„æ‰§è¡Œç»“æŸ
+oracle æ•°æ®åº“å¯¼å‡º.dmpæ–‡ä»¶æ—¶çš„æ­¥éª¤ï¼š
+	1ã€é¦–å…ˆæ˜¯æŸ¥çœ‹éœ€è¦å¯¼å‡ºçš„ç”¨æˆ·ä¸‹æ˜¯å¦å­˜åœ¨æ•°æ®ä¸ºç©ºçš„è¡¨ï¼ŒæŸ¥è¯¢ç©ºè¡¨çš„è¯­å¥æ˜¯
 		select table_name from user_table where num_rows=0 
-		»òÕßÍ³¼Æ¿Õ±íµÄÊıÁ¿ select count(*) from user_table where num_rows=0 
-		ÕâÀï»¹Òª×¢ÒâµÄÊÇ£¬µ±ÔÚÒ»¸ö±í¿Õ¼äÖĞ´æÔÚ¶àÕÅÃû×ÖÏàÍ¬µÄ±íÔÚ²»Í¬µÄÓÃ»§ÏÂµÄÊ±ºò£¬ÓĞ¿ÉÄÜÆäËûÓÃ»§ÏÂ¸ÃÕÅ±íÖĞÓĞÊı¾İ£¬¶øÔÚµ±Ç°ÓÃ»§
-		ÏÂÊÇÃ»ÓĞÊı¾İµÄ£¬ÄÇÃ´´ËÊ±ÓÃÉÏÃæµÄÓï¾ä»á²é²»µ½¸ÃÕÅ±íµÄ£¬ÒòÎªËüµÄnum_rows²»Îª0µ«ÊÇ£¬ÔÚ¸ÃÓÃ»§ÏÂÊÇ¿Õ±í£¬ÕâÖÖÇé¿ö¾ÍĞèÒª½øĞĞ±È¶Ô
-	2¡¢Èç¹û´æÔÚ¿Õ±í£¬ÄÇÃ´Ö´ĞĞÈçÏÂµÄÓï¾ä£º
+		æˆ–è€…ç»Ÿè®¡ç©ºè¡¨çš„æ•°é‡ select count(*) from user_table where num_rows=0 
+		è¿™é‡Œè¿˜è¦æ³¨æ„çš„æ˜¯ï¼Œå½“åœ¨ä¸€ä¸ªè¡¨ç©ºé—´ä¸­å­˜åœ¨å¤šå¼ åå­—ç›¸åŒçš„è¡¨åœ¨ä¸åŒçš„ç”¨æˆ·ä¸‹çš„æ—¶å€™ï¼Œæœ‰å¯èƒ½å…¶ä»–ç”¨æˆ·ä¸‹è¯¥å¼ è¡¨ä¸­æœ‰æ•°æ®ï¼Œè€Œåœ¨å½“å‰ç”¨æˆ·
+		ä¸‹æ˜¯æ²¡æœ‰æ•°æ®çš„ï¼Œé‚£ä¹ˆæ­¤æ—¶ç”¨ä¸Šé¢çš„è¯­å¥ä¼šæŸ¥ä¸åˆ°è¯¥å¼ è¡¨çš„ï¼Œå› ä¸ºå®ƒçš„num_rowsä¸ä¸º0ä½†æ˜¯ï¼Œåœ¨è¯¥ç”¨æˆ·ä¸‹æ˜¯ç©ºè¡¨ï¼Œè¿™ç§æƒ…å†µå°±éœ€è¦è¿›è¡Œæ¯”å¯¹
+	2ã€å¦‚æœå­˜åœ¨ç©ºè¡¨ï¼Œé‚£ä¹ˆæ‰§è¡Œå¦‚ä¸‹çš„è¯­å¥ï¼š
 		select 'alter table '||table_name||' allocate extent;' from user_table where num_rows=0 or num_rows is null ;
-		½«²éÑ¯³öµÄÓï¾äÅúÁ¿£¨»òÕßµ¥Ò»£©µÄÖ´ĞĞ£¬¶Ô¿Õ±í½øĞĞ¿Õ¼äµÄÊÖ¶¯·ÖÅä.
+		å°†æŸ¥è¯¢å‡ºçš„è¯­å¥æ‰¹é‡ï¼ˆæˆ–è€…å•ä¸€ï¼‰çš„æ‰§è¡Œï¼Œå¯¹ç©ºè¡¨è¿›è¡Œç©ºé—´çš„æ‰‹åŠ¨åˆ†é….
 		
-		Èç¹û²»´æÔÚ¿Õ±í£¬ÄÇÃ´Ö±½Ó¼ÌĞø²½Öè3
-	3¡¢ÒÔ¹ÜÀíÔ±µÄÉí·İÖ´ĞĞdocÃüÁî£¨cmd£©,È»ºóÖ´ĞĞÈçÏÂµÄÓï¾ä
+		å¦‚æœä¸å­˜åœ¨ç©ºè¡¨ï¼Œé‚£ä¹ˆç›´æ¥ç»§ç»­æ­¥éª¤3
+	3ã€ä»¥ç®¡ç†å‘˜çš„èº«ä»½æ‰§è¡Œdocå‘½ä»¤ï¼ˆcmdï¼‰,ç„¶åæ‰§è¡Œå¦‚ä¸‹çš„è¯­å¥
 		exp rcms11test/rcms11test@192.168.65.92:1521/orcl file=C:\software\exporOracle\rcmsExport.dmp
-	5¡¢µÈ´ıÎÄ¼şµÄµ¼Èë³É¹¦
-	6¡¢³É¹¦Ö®ºó£¬ĞèÒª½øĞĞÑéÖ¤£¬¿´ÊÇ·ñÓĞÂ©µôÎªµ¼³öµÄ±í½á¹¹
-		ÕâÖÖÇé¿öÊÇÒòÎªÔÚÏàÍ¬±í¿Õ¼äÖĞ£¬ÔÚ²»Í¬µÄÓÃ»§ÏÂ´æÔÚÏàÍ¬±íÊ±£¬µ±ÆäÖĞÓĞÒ»¸öÓÃ»§ÏÂµÄ±í²»Îª¿Õ£¬ÄÇÃ´²½Öè1¾Í²»»á²éµ½¸ÃÕÅ±í£¬
-		Ò²¾Í²»»á·ÖÅä¿Õ¼ä£¬ÔÚµ¼³öÊ±¾Í»á³öÏÖ¸ÃÕÅ±íµÄĞÅÏ¢µÄÈ±Ê§¡£¿¼ÂÇµ½ÕâÖÖÇé¿ö£¬»¹ÊÇĞèÒª½«ÒÑ¾­µ¼³öµÄÎÄ¼ş£¬Í¨¹ı´´½¨ĞÂµÄÓÃ»§²¢½«ÎÄ¼şµ¼Èë
-		È»ºóÍ¨¹ıselect count(*) from user_tables¶Ô±ÈÁ½¸öÓÃ»§ÏÂ±íµÄÊı¾İÊÇ·ñÏàµÈ
+	5ã€ç­‰å¾…æ–‡ä»¶çš„å¯¼å…¥æˆåŠŸ
+	6ã€æˆåŠŸä¹‹åï¼Œéœ€è¦è¿›è¡ŒéªŒè¯ï¼Œçœ‹æ˜¯å¦æœ‰æ¼æ‰ä¸ºå¯¼å‡ºçš„è¡¨ç»“æ„
+		è¿™ç§æƒ…å†µæ˜¯å› ä¸ºåœ¨ç›¸åŒè¡¨ç©ºé—´ä¸­ï¼Œåœ¨ä¸åŒçš„ç”¨æˆ·ä¸‹å­˜åœ¨ç›¸åŒè¡¨æ—¶ï¼Œå½“å…¶ä¸­æœ‰ä¸€ä¸ªç”¨æˆ·ä¸‹çš„è¡¨ä¸ä¸ºç©ºï¼Œé‚£ä¹ˆæ­¥éª¤1å°±ä¸ä¼šæŸ¥åˆ°è¯¥å¼ è¡¨ï¼Œ
+		ä¹Ÿå°±ä¸ä¼šåˆ†é…ç©ºé—´ï¼Œåœ¨å¯¼å‡ºæ—¶å°±ä¼šå‡ºç°è¯¥å¼ è¡¨çš„ä¿¡æ¯çš„ç¼ºå¤±ã€‚è€ƒè™‘åˆ°è¿™ç§æƒ…å†µï¼Œè¿˜æ˜¯éœ€è¦å°†å·²ç»å¯¼å‡ºçš„æ–‡ä»¶ï¼Œé€šè¿‡åˆ›å»ºæ–°çš„ç”¨æˆ·å¹¶å°†æ–‡ä»¶å¯¼å…¥
+		ç„¶åé€šè¿‡select count(*) from user_tableså¯¹æ¯”ä¸¤ä¸ªç”¨æˆ·ä¸‹è¡¨çš„æ•°æ®æ˜¯å¦ç›¸ç­‰
 
-oracle Êı¾İ¿âµ¼Èë.dmpÎÄ¼şÊ±µÄ²½Öè£º
-	1¡¢´ò¿ªdocÃüÁî´°¿Ú£¨cmd£©£¬È»ºóÖ´ĞĞÈçÏÂµÄÓï¾ä£º
+oracle æ•°æ®åº“å¯¼å…¥.dmpæ–‡ä»¶æ—¶çš„æ­¥éª¤ï¼š
+	1ã€æ‰“å¼€docå‘½ä»¤çª—å£ï¼ˆcmdï¼‰ï¼Œç„¶åæ‰§è¡Œå¦‚ä¸‹çš„è¯­å¥ï¼š
 		imp rcmsExport/rcmsExport@192.168.65.92:1521/orcl file=C:\software\Export
 
-oracle´´½¨ÓÃ»§£º
-	create user shopping identified by shopping--ÓÃ»§ÃûÎªshopping£¬ÃÜÂëÎªshopping
-	default tablespace shopping --Ä¬ÈÏ±í¿Õ¼äÎªshopping
-	temporary tablespace shopping_temp; --Ä¬ÈÏÁÙÊ±±í¿Õ¼äÎªshopping_temp
+oracleåˆ›å»ºç”¨æˆ·ï¼š
+	create user shopping identified by shopping--ç”¨æˆ·åä¸ºshoppingï¼Œå¯†ç ä¸ºshopping
+	default tablespace shopping --é»˜è®¤è¡¨ç©ºé—´ä¸ºshopping
+	temporary tablespace shopping_temp; --é»˜è®¤ä¸´æ—¶è¡¨ç©ºé—´ä¸ºshopping_temp
 
 	grant connect,resource,dba to shopping;
 	
 
-	´´½¨ÓÃ»§
+	åˆ›å»ºç”¨æˆ·
 	create user User_Test identified by Password_Test default tablespace TableSpace_Test account unlock;
 
-	--¸øÓÃ»§ÊÚÈ¨
+	--ç»™ç”¨æˆ·æˆæƒ
 	grant create table,create view,create trigger, create sequence,create procedure to User_Test;
 	grant dba to User_Test;
