@@ -37,8 +37,8 @@ oracle 数据库导出.dmp文件时的步骤：
 		
 		如果不存在空表，那么直接继续步骤3
 	3、以管理员的身份执行doc命令（cmd）,然后执行如下的语句
-		exp rcms11test/rcms11test@192.168.65.92:1521/orcl file=C:\software\exporOracle\rcmsExport.dmp
-		exp rcms11test/rcms11test@192.168.65.92:1521/orcl file=C:\software\exporOracle\rcmsExport.dmp log=%date%.log
+		exp ms11test/msms11test@192.168.3.2:1521/orcl file=C:\software\exporOracle\msExport.dmp
+		exp ms11test/ms11test@192.168.3.2:1521/orcl file=C:\software\exporOracle\msExport.dmp log=%date%.log
 	第二种是为了在导出文件时导出生成的日志信息，但是%date% 这个是取系统的当前时间，如果提示有多个值时，可以使用%date:~0,8%这个是去日期的2018-02-12这种形式作为文件名，如果提示生成多个文件，以2018/01/12这种形式，需要自己将电脑的系统时间的格式调一下
 		
 		
@@ -51,7 +51,7 @@ oracle 数据库导出.dmp文件时的步骤：
 
 oracle 数据库导入.dmp文件时的步骤：
 	1、打开doc命令窗口（cmd），然后执行如下的语句：
-		imp rcmsExport/rcmsExport@192.168.65.92:1521/orcl file=C:\software\Export
+		imp msExport/msExport@192.168.3.92:1521/orcl file=C:\software\Export
 
 oracle创建用户：
 	create user shopping identified by shopping--用户名为shopping，密码为shopping
